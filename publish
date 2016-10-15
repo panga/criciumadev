@@ -1,0 +1,14 @@
+#!/bin/sh
+
+AWS_ACCOUNT=388108452310
+AWS_REGION=us-east-1
+AWS_ECR_REPOSITORY=criciumadev
+
+# Login on AWS ECR
+eval $(aws ecr get-login --region $AWS_REGION)
+
+# Tag image
+docker tag criciumadev:latest $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_ECR_REPOSITORY:latest
+
+# Push image
+docker push $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_ECR_REPOSITORY:latest
